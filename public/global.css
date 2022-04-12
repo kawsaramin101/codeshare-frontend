@@ -1,0 +1,39 @@
+
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    min-height: 100vh;
+    max-width: 400px;
+    margin: 0 auto;
+	box-sizing: border-box;
+    
+}
+
+/*
+svg:hover {
+    stroke: transparent !important;
+    stroke-width: 0px;
+}*/
+svg:focus {
+    outline:none;
+}
+path:focus {
+        outline:none;
+}
+
+.card {
+  --padding: 1rem;
+  background: white;
+  border: 1px solid #777;
+  border-radius: .25rem;
+  overflow: hidden;
+}
+
+.card.card-shadow {
+  border: none;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .2);
+}
+
