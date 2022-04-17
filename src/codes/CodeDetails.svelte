@@ -44,7 +44,7 @@
     
 </script>
 
-<div class="m-3">
+<div class="card card-shadow">
     {#if error }
         <p>{error}</p>
     {/if }
@@ -52,14 +52,17 @@
         <Loading />
     {/if }
     {#if code }
-        <h4 class="is-size-4 has-text-weight-bold">{code.title}</h4>
-        <div class="ql-snow">
-        <div class="ql-editor" contenteditable="true" bind:innerHTML={code.body}></div>
-        
-        <div class="reaction-wrapper">
-            <Reaction  code_or_comment="code" code_or_comment_id={code.id} user_reaction={code.request_user_reaction} number_of_reactions={code.number_of_reactions} />
-        </div>
+        <div class="card-content">
+            <h4 class="is-size-4 has-text-weight-bold">{code.title}</h4>
             
+            <div class="">
+                <div class="ql-editor" contenteditable="true" bind:innerHTML={code.body}></div>
+            </div>
+                
+                <div class="reaction-wrapper">
+                    <Reaction  code_or_comment="code" code_or_comment_id={code.id} user_reaction={code.request_user_reaction} number_of_reactions={code.number_of_reactions} />
+                </div>
+                    
         </div>
     {/if }
 </div>

@@ -29,30 +29,38 @@
         headers: {'Authorization': `Token ${userDetails.token}`}
     });
     
+    let error;
+    let isLoading = false;
+    
     function handleClick(value) {
-        console.log(value);
+        if (!userDetails.isAuthenticated) {
+            error = "You are not logged in";
+            return
+        }
+        isLoading = true;
         if ( reacted === value ) {
             instance.delete(`codes/reaction-edit-delete/${user_reaction.id}/`)
             .then((res) => {
-                console.log(res);
                 number_of_reactions = res.data.number_of_reactions;
                 reacted = null;
+                isLoading = false;
             })
             .catch(err => {
-                console.log(err);
+                isLoading = false;
+                error = err;
             })
             
         }
         else if (reacted !== null && reacted !== value) {
             instance.patch(`codes/reaction-edit-delete/${user_reaction.id}/`, {name: value})
             .then(res => {
-                console.log(res);
                 reacted = value;
                 user_reaction = res.data.reaction;
                 number_of_reactions = res.data.number_of_reactions;
             })
             .catch(err => {
-                console.log(err);
+                isLoading = false;
+                error = err;
             })
             
         }
@@ -65,12 +73,12 @@
             instance.post("codes/reaction-create/", body)
                 .then(res => {
                     reacted = value;
-                    console.log(res);
                     user_reaction = res.data.reaction;
                     number_of_reactions = res.data.number_of_reactions;
                 })
                 .catch(err => {
-                    console.log(err);
+                    isLoading = false;
+                    error = err;
                 })
         }
     }
@@ -87,6 +95,9 @@
             </span>
         </div>
     {/each}
+    {#if error }
+    <p>{error}</p>
+    {/if }
 </div>
 
 <style>
@@ -97,7 +108,7 @@
     .user-selection {
         border: 1px solid #77d6ee;
         border-radius: 20%;
-        background-color: #ffffffae;
+        background-color: #00ccff;
     }
     
 </style>
